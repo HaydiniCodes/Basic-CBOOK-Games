@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Basketball Arcade Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #87CEEB;
+      font-family: Arial, sans-serif;
+    }
+
+    #game-container {
+      position: relative;
+      width: 300px;
+      height: 500px;
+      background: #F5F5F5;
+      border: 2px solid #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #hoop {
+      position: absolute;
+      top: 50px;
+      left: 50%;
+      width: 100px;
+      height: 20px;
+      background: #FF4500;
+      transform: translateX(-50%);
+      border-radius: 10px;
+    }
+
+    #ball {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      background: #FFD700;
+      border-radius: 50%;
+      transform: translateX(-50%);
+    }
+
+    #shoot-button {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #32CD32;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #shoot-button:hover {
+      background-color: #228B22;
+    }
+
+    #scoreboard {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="hoop"></div>
+    <div id="ball"></div>
+    <button id="shoot-button">Shoot!</button>
+    <div id="scoreboard">Score: 0</div>
+  </div>
+  <script>
+    const ball = document.getElementById('ball');
+    const hoop = document.getElementById('hoop');
+    const shootButton = document.getElementById('shoot-button');
+    const scoreboard = document.getElementById('scoreboard');
+
+    let score = 0;
+
+    shootButton.addEventListener('click', () => {
+      // Disable the button during the shot
+      shootButton.disabled = true;
+
+      // Animate the ball up to the hoop
+      const ballStartPosition = ball.getBoundingClientRect();
+      const hoopPosition = hoop.getBoundingClientRect();
+
+      const deltaX = hoopPosition.left + hoopPosition.width / 2 - (ballStartPosition.left + ballStartPosition.width / 2);
+      const deltaY = hoopPosition.top - ballStartPosition.top;
+
+      ball.style.transition = 'transform 0.5s ease-out';
+      ball.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+
+      // Check if the ball scores after the animation
+      setTimeout(() => {
+        const ballFinalPosition = ball.getBoundingClientRect();
+        
+        if (
+          ballFinalPosition.left >= hoopPosition.left &&
+          ballFinalPosition.right <= hoopPosition.right &&
+          ballFinalPosition.top <= hoopPosition.bottom
+        ) {
+          // Scored!
+          score += 1;
+          scoreboard.textContent = `Score: ${score}`;
+        }
+
+        // Reset ball position
+        ball.style.transition = 'transform 0.2s ease-in';
+        ball.style.transform = 'translate(0, 0)';
+
+        // Re-enable the button
+        setTimeout(() => {
+          shootButton.disabled = false;
+        }, 200);
+      }, 500);
+    });
+  </script>
+</body>
+</html>
