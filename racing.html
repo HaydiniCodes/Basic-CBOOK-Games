@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Racing Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin: 20px auto;
+    }
+
+    .track {
+      position: relative;
+      width: 300px;
+      height: 500px;
+      margin: 20px auto;
+      background: #333;
+      overflow: hidden;
+      border: 5px solid #000;
+    }
+
+    .car {
+      position: absolute;
+      width: 50px;
+      height: 100px;
+      background: red;
+      bottom: 10px;
+      left: 125px;
+    }
+
+    .obstacle {
+      position: absolute;
+      width: 50px;
+      height: 100px;
+      background: black;
+      top: 0;
+      left: 125px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Racing Game</h1>
+  <div class="track">
+    <div class="car"></div>
+    <div class="obstacle"></div>
+  </div>
+  <p>This is a static template. For interactivity, JavaScript is needed.</p>
+</body>
+</html>
