@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baseball Game</title>
+</head>
+<body>
+    <h1>Baseball Game</h1>
+    <p>Click the "Swing" button to try hitting the ball!</p>
+    <p id="status">Waiting for your swing...</p>
+    <p>Score: <span id="score">0</span></p>
+    <button onclick="swing()">Swing</button>
+
+    <script>
+        let score = 0;
+
+        function swing() {
+            const hit = Math.random() < 0.5; // 50% chance to hit
+            const statusElement = document.getElementById('status');
+            const scoreElement = document.getElementById('score');
+
+            if (hit) {
+                score++;
+                statusElement.textContent = "You hit the ball! Great job!";
+            } else {
+                statusElement.textContent = "You missed! Try again!";
+            }
+
+            scoreElement.textContent = score;
+        }
+    </script>
+</body>
+</html>
