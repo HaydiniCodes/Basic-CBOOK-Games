@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toolbox</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .tool {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px #aaa;
+        }
+        .tool h2 {
+            margin-top: 0;
+        }
+        input, select, button {
+            margin: 5px 0;
+            padding: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Toolbox</h1>
+
+    <!-- Unit Converter -->
+    <div class="tool" id="unit-converter">
+        <h2>Unit Converter</h2>
+        <label for="value">Value:</label>
+        <input type="number" id="value" placeholder="Enter a value">
+        <br>
+        <label for="unit-from">From:</label>
+        <select id="unit-from">
+            <option value="meters">Meters</option>
+            <option value="kilometers">Kilometers</option>
+            <option value="miles">Miles</option>
+        </select>
+        <br>
+        <label for="unit-to">To:</label>
+        <select id="unit-to">
+            <option value="meters">Meters</option>
+            <option value="kilometers">Kilometers</option>
+            <option value="miles">Miles</option>
+        </select>
+        <br>
+        <button onclick="convertUnits()">Convert</button>
+        <p id="conversion-result"></p>
+    </div>
+
+    <!-- Calculator -->
+    <div class="tool" id="calculator">
+        <h2>Calculator</h2>
+        <input type="number" id="calc-num1" placeholder="Number 1">
+        <input type="number" id="calc-num2" placeholder="Number 2">
+        <br>
+        <button onclick="calculate('add')">+</button>
+        <button onclick="calculate('subtract')">-</button>
+        <button onclick="calculate('multiply')">*</button>
+        <button onclick="calculate('divide')">/</button>
+        <p id="calc-result"></p>
+    </div>
+
+    <!-- Currency Converter -->
+    <div class="tool" id="currency-converter">
+        <h2>Currency Converter</h2>
+        <label for="currency-amount">Amount:</label>
+        <input type="number" id="currency-amount" placeholder="Enter amount">
+        <br>
+        <label for="currency-from">From:</label>
+        <select id="currency-from">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+        </select>
+        <br>
+        <label for="currency-to">To:</label>
+        <select id="currency-to">
+            <option value="USD">USD</option>
+            <option value="EUR">EUR</option>
+            <option value="JPY">JPY</option>
+        </select>
+        <br>
+        <button onclick="convertCurrency()">Convert</button>
+        <p id="currency-result"></p>
+    </div>
+
+    <!-- Date Difference Calculator -->
+    <div class="tool" id="date-difference">
+        <h2>Date Difference Calculator</h2>
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date">
+        <br>
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date">
+        <br>
+        <button onclick="calculateDateDifference()">Calculate</button>
+        <p id="date-difference-result"></p>
+    </div>
+
+    <!-- Tip Calculator -->
+    <div class="tool" id="tip-calculator">
+        <h2>Tip Calculator</h2>
+        <label for="bill-amount">Bill Amount:</label>
+        <input type="number" id="bill-amount" placeholder="Enter bill amount">
+        <br>
+        <label for="tip-percentage">Tip Percentage:</label>
+        <input type="number" id="tip-percentage" placeholder="Enter tip percentage">
+        <br>
+        <button onclick="calculateTip()">Calculate Tip</button>
+        <p id="tip-result"></p>
+    </div>
+
+    <script>
+        // Unit Converter Logic
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('value').value);
+            const fromUnit = document.getElementById('unit-from').value;
+            const toUnit = document.getElementById('unit-to').value;
+
+            if (isNaN(value)) {
+                document.getElementById('conversion-result').innerText = 'Please enter a valid number.';
+                return;
+            }
+
+            let conversionRate = 1;
+            if (fromUnit === 'meters' && toUnit === 'kilometers') conversionRate = 0.001;
+            if (fromUnit === 'meters' && toUnit === 'miles') conversionRate = 0.000621371;
+            if (fromUnit === 'kilometers' && toUnit === 'meters') conversionRate = 1000;
+            if (fromUnit === 'kilometers' && toUnit === 'miles') conversionRate = 0.621371;
+            if (fromUnit === 'miles' && toUnit === 'meters') conversionRate = 1609.34;
+            if (fromUnit === 'miles' && to
